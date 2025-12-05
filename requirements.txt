@@ -1,0 +1,17 @@
+pandas
+numpy
+matplotlib
+seaborn
+plotly
+scipy
+statsmodels
+scikit-learn
+jupyter
+openpyxl
+geopandas
+folium
+pingouin
+pytest
+black
+flake8
+pre-commit
