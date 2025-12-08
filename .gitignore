@@ -6,4 +6,8 @@ __pycache__/
 .env
 *.csv
 *.xlsx
-output/
+output/.
+data/raw/*
+data/processed/*
+!data/raw/*.dvc
+!data/processed/*.dvc
