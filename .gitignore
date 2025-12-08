@@ -3,9 +3,7 @@ __pycache__/
 *.pyc
 .DS_Store
 .ipynb_checkpoints
-data/raw/
 .env
 *.csv
 *.xlsx
 output/
-data/raw/
