@@ -1,2 +1,4 @@
 .dvc/path/to/storage/files/md5/** filter=lfs diff=lfs merge=lfs -text
+.dvc/path/to/storage/files/md5/3a/3ebe91e2a30278a9de5567307a82d3 filter=lfs diff=lfs merge=lfs -text
+.dvc/path/to/storage/files/md5/f6/b7009b68ae21372b7deca9307fbb23 filter=lfs diff=lfs merge=lfs -text
 .dvc/path/to/storage/files/* !text !filter !merge !diff
