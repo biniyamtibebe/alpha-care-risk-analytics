@@ -1,3 +1,7 @@
-remote "localstorage"
-url = ../dvc_local_storage
-default = localstorage
+[core]
+    remote = localstorage
+
+[remote "localstorage"]
+    url = path/to/storage  # Replace with your actual storage path or URL
+    
+    
