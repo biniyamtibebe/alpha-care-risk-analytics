@@ -6,9 +6,21 @@ __pycache__/
 .env
 *.csv
 *.xlsx
-output/.
-data/raw/*
+
+# Ignore outputs
+output/
+
+# Ignore data files, but keep DVC metafiles
+ data/raw/
+data/raw
 data/processed/*
 !data/raw/*.dvc
 !data/processed/*.dvc
-data/raw
+
+# Ignore DVC internal directories
+.dvc/cache/
+.dvc/tmp/
+.dvc/path/
+.dvc/cache/
+.dvc/tmp/
+.dvc/path/
