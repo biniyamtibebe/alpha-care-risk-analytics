@@ -9,14 +9,24 @@ def process_data(input_path, output_path):
         # Strip whitespace from column names if necessary
         df.columns = df.columns.str.strip()
         
-        # Check if the column exists before processing
+        # Check if the 'TransactionMonth' column exists before processing
         if 'TransactionMonth' in df.columns:
             df['TransactionMonth'] = pd.to_datetime(df['TransactionMonth'])
         else:
             print("Column 'TransactionMonth' not found in DataFrame")
             return
+
+        # Ensure 'PostalCode' is treated as a string
+        if 'PostalCode' in df.columns:
+            df['PostalCode'] = df['PostalCode'].astype(str)
         
-        df['PostalCode'] = df['PostalCode'].astype(str)
+        # Adding a new feature 'NewFeature', simulating an update based on 'TotalPremium'
+        if 'TotalPremium' in df.columns:
+            df['NewFeature'] = df['TotalPremium'] * 1.1  # Example modification
+        else:
+            print("Column 'TotalPremium' not found in DataFrame")
+        
+        # Save the processed DataFrame to a CSV file
         df.to_csv(output_path, index=False)
         print(f"Processed data saved to {output_path}")
         
