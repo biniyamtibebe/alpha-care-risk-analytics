@@ -3,10 +3,10 @@ import numpy as np
 from scipy import stats
 import pingouin as pg  # For Welch's t-test if variances unequal
 
-def load_aggregated_data(path='data/processed/policy_aggregated.csv'):
+def load_aggregated_data(path=r'C:\Users\hp\Pictures\AlphaCare Insurance Solutions (ACIS)\alpha-care-risk-analytics\data\processed\insurance_cleaned_dataset_with_kpis.csv'):
     return pd.read_csv(path)
 
-def check_group_balance(df, group_col, balance_cols=['VehicleType', 'Make']):
+def check_group_balance(df, group_col, balance_cols=['VehicleType', 'make']):
     for col in balance_cols:
         contingency = pd.crosstab(df[group_col], df[col])
         chi2, p, _, _ = stats.chi2_contingency(contingency)
@@ -14,14 +14,14 @@ def check_group_balance(df, group_col, balance_cols=['VehicleType', 'Make']):
     # Add mean comparisons if numerical balance cols
 
 def test_frequency_difference(df, group_col):
-    contingency = pd.crosstab(df[group_col], df['HasClaim'])
+    contingency = pd.crosstab(df[group_col], df['has_claim'])
     if contingency.shape[0] < 2 or contingency.sum().min() < 5:
         return np.nan, np.nan
     chi2, p, _, _ = stats.chi2_contingency(contingency)
     return chi2, p
 
 def test_severity_difference(df, group_col):
-    claimants = df[df['HasClaim'] == 1]
+    claimants = df[df['has_claim'] == 1]
     groups = [claimants[claimants[group_col] == g]['ClaimAmount'].dropna() for g in claimants[group_col].unique()]
     groups = [g for g in groups if len(g) > 1 and g.var() > 0]  # Skip invalid groups
     if len(groups) < 2:
@@ -42,7 +42,7 @@ def test_gender_risk(df):
     # Frequency
     chi2_freq, p_freq = test_frequency_difference(df_gender, 'Gender')
     # Severity (Welch's t-test for unequal var)
-    claimants = df_gender[df_gender['HasClaim'] == 1]
+    claimants = df_gender[df_gender['has_claim'] == 1]
     male_sev = claimants[claimants['Gender'] == 'Male']['ClaimAmount'].dropna()
     female_sev = claimants[claimants['Gender'] == 'Female']['ClaimAmount'].dropna()
     t_sev, p_sev = stats.ttest_ind(male_sev, female_sev, equal_var=False)

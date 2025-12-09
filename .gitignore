@@ -16,6 +16,7 @@ data/raw
 data/processed/*
 !data/raw/*.dvc
 !data/processed/*.dvc
+data/processed
 
 # Ignore DVC internal directories
 .dvc/cache/
